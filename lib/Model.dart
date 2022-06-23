@@ -1,6 +1,6 @@
-class Model{
-  String? img , l1, l2;
-  Model({
-    this.img, this.l1, this.l2
-  });
-}
+ class Model{
+   String? img , name, mno;
+   Model({
+     this.img, this.name, this.mno
+   });
+ }
