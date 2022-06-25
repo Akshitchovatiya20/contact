@@ -61,7 +61,10 @@ class _homeState extends State<home> {
                           ElevatedButton(onPressed: (){
                             Model data = Model(mno: txtno.text,name: txtname.text,img: f1.path);
                             Navigator.pushNamed(context, '/',arguments: data);
-                          }, child: Text("Add"))
+                            setState((){
+                              add();
+                            });
+                            }, child: Text("Add"))
                         ],
                       ),
                     ],
@@ -135,7 +138,12 @@ class _homeState extends State<home> {
                     itemBuilder: (context,index)
                     {
                     return
-                      Text("$name",style: TextStyle(color: Colors.black,fontSize: 25),);
+                     Row(
+                       children: [
+                       Text("$name",style: TextStyle(color: Colors.black,fontSize: 25),),
+                       Text("$no",style: TextStyle(color: Colors.black,fontSize: 25),),
+                       ],
+                     );
                   },),
                 ],
               ),
