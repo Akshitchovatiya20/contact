@@ -1,5 +1,4 @@
-import 'package:contact/Details.dart';
-import 'package:contact/Home.dart';
+import 'package:contact/screen/home/view/Home.dart';
 import 'package:flutter/material.dart';
 
 void main()
@@ -9,7 +8,6 @@ void main()
       debugShowCheckedModeBanner: false,
       routes: {
         '/': (context) => home(),
-        'dt': (context) => detail(),
       },
     ),
   );
