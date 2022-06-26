@@ -1,5 +1,6 @@
 import 'dart:io';
-import 'package:contact/Model.dart';
+import 'package:contact/screen/home/view/Model.dart';
+import 'package:contact/utils/constant/componets/size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
@@ -14,6 +15,7 @@ class home extends StatefulWidget {
 class _homeState extends State<home> {
   List name = [""];
   List no = [""];
+  List img = [""];
 
 
   TextEditingController txtname = TextEditingController();
@@ -38,7 +40,7 @@ class _homeState extends State<home> {
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
+                          Align(
                             alignment: Alignment.topCenter,
                             child: GestureDetector(
                               onTap: ()async{
@@ -57,12 +59,11 @@ class _homeState extends State<home> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 15,),
+                          H(15),
                           ElevatedButton(onPressed: (){
-                            Model data = Model(mno: txtno.text,name: txtname.text,img: f1.path);
+                            Modal data = Modal(mno: txtno.text,name: txtname.text,f1: f1);
                             Navigator.pushNamed(context, '/',arguments: data);
                             setState((){
-                              add();
                             });
                             }, child: Text("Add"))
                         ],
@@ -131,7 +132,7 @@ class _homeState extends State<home> {
               Row(
                 children: [
                   //Container(height: 50,width: 50,padding: EdgeInsets.all(10),child: Image.file(f1)),
-                  SizedBox(width: 10,),
+                  W(10),
                   ListView.builder(
                     itemCount: name.length,
                     shrinkWrap: true,
@@ -140,8 +141,9 @@ class _homeState extends State<home> {
                     return
                      Row(
                        children: [
-                       Text("$name",style: TextStyle(color: Colors.black,fontSize: 25),),
-                       Text("$no",style: TextStyle(color: Colors.black,fontSize: 25),),
+                         Container(height: 50,width: 50,padding: EdgeInsets.all(10),child: Image.file(f1)),
+                         Text("$name",style: TextStyle(color: Colors.black,fontSize: 25),),
+                         Text("$no",style: TextStyle(color: Colors.black,fontSize: 25),),
                        ],
                      );
                   },),
@@ -163,11 +165,5 @@ class _homeState extends State<home> {
       ),
     );
   }
-  void add()
-  {
-       // Navigator.pushNamed(context, '/');
-
-  }
-
 }
 
