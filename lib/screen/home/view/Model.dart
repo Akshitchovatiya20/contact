@@ -2,8 +2,8 @@ import 'dart:io';
 
 class Modal{
     File f1 = File("");
-     String?  name, mno;
+     String?  name, no ,gmail ;
      Modal({
-      this.name, this.mno,f1
+      this.name, this.no,f1, this.gmail
    });
  }
