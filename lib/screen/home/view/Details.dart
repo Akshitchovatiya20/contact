@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:contact/main.dart';
 import 'package:contact/screen/home/view/Model.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
@@ -16,7 +17,6 @@ class detail extends StatefulWidget {
 
 class _detailState extends State<detail> {
 
-  bool ischeck = true;
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +29,11 @@ class _detailState extends State<detail> {
           actions: [
            IconButton(onPressed: (){}, icon: Icon(Icons.account_box)),
             IconButton(onPressed: (){}, icon: Icon(Icons.star_border)),
-            Switch(value: ischeck, onChanged: (value){
+            Switch(value: themeData, onChanged: (value){
               setState((){
-                ischeck = value;
+                themeData = value;
               });
+              data.add(themeData);
             })
          ],
         ),
@@ -77,7 +78,7 @@ class _detailState extends State<detail> {
                 ),
                 IconButton(
                   onPressed: () {
-                    String no = "sms: (${m2.no})";
+                    String no = "sms: ${m2.no}";
                     launchUrl(Uri.parse(no));
                   },
                   icon: Icon(
@@ -88,7 +89,7 @@ class _detailState extends State<detail> {
                 ),
                 IconButton(
                   onPressed: () async {
-                    String no = "(${m2.no})";
+                    String no = "${m2.no}";
                     await Share.share(no);
                   },
                   icon: Icon(
