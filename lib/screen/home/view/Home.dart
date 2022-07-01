@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:contact/screen/home/view/Model.dart';
 import 'package:contact/utils/constant/componets/size.dart';
+import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
@@ -22,6 +23,8 @@ class _homeState extends State<home> {
   TextEditingController txtno = TextEditingController();
   TextEditingController txtemail = TextEditingController();
   File f1 = File("");
+
+  Contact get newContact => Contact();
 
   //get floatingActionButton => null;
   @override
@@ -83,8 +86,8 @@ class _homeState extends State<home> {
                               next();
                             });
                             Navigator.pop(context);
-                          }, child: Text("Add"))
-                        ],
+                          }, child: Text("Add")),
+                  ],
                       ),
                     ),
                   );
@@ -139,44 +142,42 @@ class _homeState extends State<home> {
           child: Column(
             children: <Widget>[
               GestureDetector(
-                child: GestureDetector(
-                  onTap: (){
-                    Modal m1 = Modal(name: txtname.text,gmail: txtemail.text,no: txtno.text,f1: f1.path);
-                    Navigator.pushNamed(context, 'det',arguments: m1);
-                  },
-                  child: ListView.builder(
-                    padding: const EdgeInsets.all(8),
-                    physics: ClampingScrollPhysics(),
-                    itemCount: name.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context,index)
-                    {
-                    return
-                     Container(
-                       height: 60,
-                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                       ),
-                       margin: EdgeInsets.all(2),
-                       child: Padding(
-                         padding: const EdgeInsets.all(8),
-                         child: Row(
-                           children: [
-                             Container(
-                               height: 45,
-                               width: 45,
-                               child: CircleAvatar(
-                                 backgroundImage: FileImage(f1),
-                               ),
+                onTap: (){
+                  Modal m1 = Modal(name: txtname.text,gmail: txtemail.text,no: txtno.text,f1: f1.path);
+                  Navigator.pushNamed(context, 'det',arguments: m1);
+                },
+                child: ListView.builder(
+                  padding: const EdgeInsets.all(8),
+                  physics: ClampingScrollPhysics(),
+                  itemCount: name.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context,index)
+                  {
+                  return
+                   Container(
+                     height: 60,
+                     decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                     ),
+                     margin: EdgeInsets.all(2),
+                     child: Padding(
+                       padding: const EdgeInsets.all(8),
+                       child: Row(
+                         children: [
+                           Container(
+                             height: 45,
+                             width: 45,
+                             child: CircleAvatar(
+                               backgroundImage: FileImage(f1),
                              ),
-                             W(15),
-                             Text("${name[index]}",style: TextStyle(color: Colors.white,fontSize: 25),),
-                           ],
-                         ),
+                           ),
+                           W(15),
+                           Text("${name[index]}",style: TextStyle(color: Colors.white,fontSize: 25),),
+                         ],
                        ),
-                     );
-                  },),
-                ),
+                     ),
+                   );
+                },),
               ),
               // Align(
               //   alignment: Alignment.topCenter,
