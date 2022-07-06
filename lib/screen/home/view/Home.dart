@@ -4,6 +4,7 @@ import 'package:contact/utils/constant/componets/size.dart';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
 class home extends StatefulWidget {
@@ -17,7 +18,6 @@ class _homeState extends State<home> {
   List<String> name = [];
   List<String> no = [];
   List<String> img = [];
-
 
   TextEditingController txtname = TextEditingController();
   TextEditingController txtno = TextEditingController();
@@ -38,56 +38,85 @@ class _homeState extends State<home> {
                 context: context,
                 builder: (context){
                   return AlertDialog(
+                    backgroundColor: Colors.brown,
                     content: Container(
                       height: 300,
-                      width: 280,
-                      child: Column(
-                        children : [
-                          GestureDetector(
-                            onTap: ()async{
-                              ImagePicker img = ImagePicker();
-                              XFile? f2  = await img.pickImage(source: ImageSource.gallery);
-                              setState((){
-                                f1 = File(f2!.path);
-                              },);
-                            },
-                            child: Container(
-                              height: 100,
-                              width: 100,
-                              child: CircleAvatar(
-                                backgroundImage: FileImage(f1),
+                      //width: 260,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children : [
+                            GestureDetector(
+                              onTap: ()async{
+                                ImagePicker img = ImagePicker();
+                                XFile? f2  = await img.pickImage(source: ImageSource.gallery);
+                                setState((){
+                                  f1 = File(f2!.path);
+                                },);
+                              },
+                              child: Container(
+                                height: 100,
+                                width: 100,
+                                child: CircleAvatar(
+                                  backgroundImage: FileImage(f1),
+                                ),
                               ),
                             ),
+                             H(10),
+                            TextField(
+                              style: TextStyle(color: Colors.white),
+                            controller: txtname,
+                            decoration: InputDecoration(
+                              enabledBorder: new OutlineInputBorder(
+                                borderRadius: new BorderRadius.circular(20),
+                                borderSide:  BorderSide(color: Colors.pinkAccent ),
+
+                              ),
+                              focusedBorder: new OutlineInputBorder(
+                                borderRadius: new BorderRadius.circular(20),
+                                borderSide:  BorderSide(color: Colors.pinkAccent),
+                              ),
+                              prefixIcon: Icon(Icons.person_outline_outlined,color: Colors.green,),
+                              hintText: "Enter Name",
+                              hintStyle: TextStyle(color: Colors.white,),
+                              floatingLabelAlignment: FloatingLabelAlignment.start,
+                            ),
                           ),
-                          H(10),
-                          TextField(
-                          controller: txtname,
-                          decoration: InputDecoration(
-                            hintText: "Enter Your Name",
-                            floatingLabelAlignment: FloatingLabelAlignment.start,
+                            H(12),
+                            TextField(
+                              style: TextStyle(color: Colors.white),
+                            controller: txtno,
+                            decoration: InputDecoration(
+                              enabledBorder: new OutlineInputBorder(
+                                borderRadius: new BorderRadius.circular(20),
+                                borderSide:  BorderSide(color: Colors.pinkAccent ),
+
+                              ),
+                              focusedBorder: new OutlineInputBorder(
+                                borderRadius: new BorderRadius.circular(20),
+                                borderSide:  BorderSide(color: Colors.pinkAccent ),
+
+                              ),
+                              prefixIcon: Icon(Icons.call,color: Colors.green,),
+                              hintText: "Enter Your Mobile",
+                              hintStyle: TextStyle(color: Colors.white,),
+                              floatingLabelAlignment: FloatingLabelAlignment.start,
+                            ),
+                            maxLength: 10,
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                            ],
                           ),
-                        ),
-                          H(12),
-                          TextField(
-                          controller: txtno,
-                          decoration: InputDecoration(
-                            hintText: "Enter Your Mobile",
-                            floatingLabelAlignment: FloatingLabelAlignment.start,
-                          ),
-                          maxLength: 10,
-                          keyboardType: TextInputType.number,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly,
+                            ElevatedButton(onPressed: (){
+                              setState((){
+                                next();
+                              });
+                              // txtname.clear();
+                              // txtno.clear();
+                              Navigator.pop(context);
+                            }, child: Text("Add")),
                           ],
                         ),
-                          H(12),
-                          ElevatedButton(onPressed: (){
-                            setState((){
-                              next();
-                            });
-                            Navigator.pop(context);
-                          }, child: Text("Add")),
-                  ],
                       ),
                     ),
                   );
@@ -102,7 +131,7 @@ class _homeState extends State<home> {
           backgroundColor: Colors.teal,
           title: Text(
             "Contact",
-            style: TextStyle(color: Colors.white),
+            style: GoogleFonts.robotoFlex(),
           ),
           actions: [
             IconButton(
@@ -111,17 +140,17 @@ class _homeState extends State<home> {
                   Icons.search,
                   color: Colors.white,
                 )),
-            // FlatButton(
-            //   textColor: Colors.white,
-            //   onPressed: () {
-            //     Navigator.pushNamed(
-            //       context,
-            //       'myapp',
-            //     );
-            //   },
-            //   child: Text("Recents"),
-            //   shape: CircleBorder(side: BorderSide(color: Colors.transparent)),
-            // ),
+             FlatButton(
+               textColor: Colors.white,
+               onPressed: () {
+                 Navigator.pushNamed(
+                   context,
+                   'myapp',
+                 );
+               },
+               child: Text("Recents"),
+               shape: CircleBorder(side: BorderSide(color: Colors.transparent)),
+             ),
             PopupMenuButton(itemBuilder: (value) {
               return [
                 PopupMenuItem(

@@ -17,7 +17,6 @@ class detail extends StatefulWidget {
 
 class _detailState extends State<detail> {
 
-
   @override
   Widget build(BuildContext context) {
     Modal m2 = ModalRoute.of(context)!.settings.arguments as Modal;
@@ -69,6 +68,7 @@ class _detailState extends State<detail> {
                   onPressed: () {
                     String no = "tel: +91(${m2.no})";
                     launchUrl(Uri.parse(no));
+
                   },
                   icon: Icon(
                     Icons.call,
