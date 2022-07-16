@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:contact/screen/home/view/Details.dart';
 import 'package:contact/screen/home/view/Home.dart';
+import 'package:contact/screen/home/view/Model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 bool themeData = true;
 StreamController<bool>data = StreamController();
-
 void main()
 {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(

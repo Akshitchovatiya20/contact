@@ -7,6 +7,8 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../utils/constant/componets/textStyle.dart';
+
 class home extends StatefulWidget {
   const home({Key? key}) : super(key: key);
 
@@ -16,6 +18,7 @@ class home extends StatefulWidget {
 
 class _homeState extends State<home> {
   List<String> name = [];
+  List<String> gmail = [];
   List<String> no = [];
   List<String> img = [];
 
@@ -36,7 +39,7 @@ class _homeState extends State<home> {
           onPressed: () {
             showDialog(
                 context: context,
-                builder: (context){
+                builder: (context) {
                   return AlertDialog(
                     backgroundColor: Colors.brown,
                     content: Container(
@@ -44,14 +47,17 @@ class _homeState extends State<home> {
                       //width: 260,
                       child: SingleChildScrollView(
                         child: Column(
-                          children : [
+                          children: [
                             GestureDetector(
-                              onTap: ()async{
+                              onTap: () async {
                                 ImagePicker img = ImagePicker();
-                                XFile? f2  = await img.pickImage(source: ImageSource.gallery);
-                                setState((){
-                                  f1 = File(f2!.path);
-                                },);
+                                XFile? f2 = await img.pickImage(
+                                    source: ImageSource.gallery);
+                                setState(
+                                  () {
+                                    f1 = File(f2!.path);
+                                  },
+                                );
                               },
                               child: Container(
                                 height: 100,
@@ -61,67 +67,81 @@ class _homeState extends State<home> {
                                 ),
                               ),
                             ),
-                             H(10),
+                            H(10),
                             TextField(
                               style: TextStyle(color: Colors.white),
-                            controller: txtname,
-                            decoration: InputDecoration(
-                              enabledBorder: new OutlineInputBorder(
-                                borderRadius: new BorderRadius.circular(20),
-                                borderSide:  BorderSide(color: Colors.pinkAccent ),
-
+                              controller: txtname,
+                              decoration: InputDecoration(
+                                enabledBorder: new OutlineInputBorder(
+                                  borderRadius: new BorderRadius.circular(20),
+                                  borderSide:
+                                      BorderSide(color: Colors.pinkAccent),
+                                ),
+                                focusedBorder: new OutlineInputBorder(
+                                  borderRadius: new BorderRadius.circular(20),
+                                  borderSide:
+                                      BorderSide(color: Colors.pinkAccent),
+                                ),
+                                prefixIcon: Icon(
+                                  Icons.person_outline_outlined,
+                                  color: Colors.green,
+                                ),
+                                hintText: "Enter Name",
+                                hintStyle: TextStyle(
+                                  color: Colors.white,
+                                ),
+                                floatingLabelAlignment:
+                                    FloatingLabelAlignment.start,
                               ),
-                              focusedBorder: new OutlineInputBorder(
-                                borderRadius: new BorderRadius.circular(20),
-                                borderSide:  BorderSide(color: Colors.pinkAccent),
-                              ),
-                              prefixIcon: Icon(Icons.person_outline_outlined,color: Colors.green,),
-                              hintText: "Enter Name",
-                              hintStyle: TextStyle(color: Colors.white,),
-                              floatingLabelAlignment: FloatingLabelAlignment.start,
                             ),
-                          ),
                             H(12),
                             TextField(
                               style: TextStyle(color: Colors.white),
-                            controller: txtno,
-                            decoration: InputDecoration(
-                              enabledBorder: new OutlineInputBorder(
-                                borderRadius: new BorderRadius.circular(20),
-                                borderSide:  BorderSide(color: Colors.pinkAccent ),
-
+                              controller: txtno,
+                              decoration: InputDecoration(
+                                enabledBorder: new OutlineInputBorder(
+                                  borderRadius: new BorderRadius.circular(20),
+                                  borderSide:
+                                      BorderSide(color: Colors.pinkAccent),
+                                ),
+                                focusedBorder: new OutlineInputBorder(
+                                  borderRadius: new BorderRadius.circular(20),
+                                  borderSide:
+                                      BorderSide(color: Colors.pinkAccent),
+                                ),
+                                prefixIcon: Icon(
+                                  Icons.call,
+                                  color: Colors.green,
+                                ),
+                                hintText: "Enter Your Mobile",
+                                hintStyle: TextStyle(
+                                  color: Colors.white,
+                                ),
+                                floatingLabelAlignment:
+                                    FloatingLabelAlignment.start,
                               ),
-                              focusedBorder: new OutlineInputBorder(
-                                borderRadius: new BorderRadius.circular(20),
-                                borderSide:  BorderSide(color: Colors.pinkAccent ),
-
-                              ),
-                              prefixIcon: Icon(Icons.call,color: Colors.green,),
-                              hintText: "Enter Your Mobile",
-                              hintStyle: TextStyle(color: Colors.white,),
-                              floatingLabelAlignment: FloatingLabelAlignment.start,
+                              maxLength: 10,
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly,
+                              ],
                             ),
-                            maxLength: 10,
-                            keyboardType: TextInputType.number,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly,
-                            ],
-                          ),
-                            ElevatedButton(onPressed: (){
-                              setState((){
-                                next();
-                              });
-                              // txtname.clear();
-                              // txtno.clear();
-                              Navigator.pop(context);
-                            }, child: Text("Add")),
+                            ElevatedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    next();
+                                  });
+                                  // txtname.clear();
+                                  // txtno.clear();
+                                  Navigator.pop(context);
+                                },
+                                child: Text("Add")),
                           ],
                         ),
                       ),
                     ),
                   );
-                }
-            );
+                });
           },
           backgroundColor: Colors.red,
           child: const Icon(Icons.add),
@@ -131,7 +151,7 @@ class _homeState extends State<home> {
           backgroundColor: Colors.teal,
           title: Text(
             "Contact",
-            style: GoogleFonts.robotoFlex(),
+            style: roboto,
           ),
           actions: [
             IconButton(
@@ -140,17 +160,17 @@ class _homeState extends State<home> {
                   Icons.search,
                   color: Colors.white,
                 )),
-             FlatButton(
-               textColor: Colors.white,
-               onPressed: () {
-                 Navigator.pushNamed(
-                   context,
-                   'myapp',
-                 );
-               },
-               child: Text("Recents"),
-               shape: CircleBorder(side: BorderSide(color: Colors.transparent)),
-             ),
+            FlatButton(
+              textColor: Colors.white,
+              onPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  'myapp',
+                );
+              },
+              child: Text("Recents"),
+              shape: CircleBorder(side: BorderSide(color: Colors.transparent)),
+            ),
             PopupMenuButton(itemBuilder: (value) {
               return [
                 PopupMenuItem(
@@ -170,86 +190,59 @@ class _homeState extends State<home> {
         body: Center(
           child: Column(
             children: <Widget>[
-              GestureDetector(
-                onTap: (){
-                  Modal m1 = Modal(name: txtname.text,gmail: txtemail.text,no: txtno.text,f1: f1.path);
-                  Navigator.pushNamed(context, 'det',arguments: m1);
-                },
-                child: ListView.builder(
-                  padding: const EdgeInsets.all(8),
-                  physics: ClampingScrollPhysics(),
-                  itemCount: name.length,
-                  shrinkWrap: true,
-                  itemBuilder: (context,index)
-                  {
-                  return
-                   Container(
-                     height: 60,
-                     decoration: BoxDecoration(
+              ListView.builder(
+                padding: const EdgeInsets.all(8),
+                physics: ClampingScrollPhysics(),
+                itemCount: name.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      Modal m1 = Modal(
+                         name: name[index],no: no[index],f1: f1,img: f1.path
+                      );
+                      Navigator.pushNamed(context, 'det',arguments: m1);
+                    },
+                    child: Container(
+                      height: 60,
+                      decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                     ),
-                     margin: EdgeInsets.all(2),
-                     child: Padding(
-                       padding: const EdgeInsets.all(8),
-                       child: Row(
-                         children: [
-                           Container(
-                             height: 45,
-                             width: 45,
-                             child: CircleAvatar(
-                               backgroundImage: FileImage(f1),
-                             ),
-                           ),
-                           W(15),
-                           Text("${name[index]}",style: TextStyle(color: Colors.white,fontSize: 25),),
-                         ],
-                       ),
-                     ),
-                   );
-                },),
+                      ),
+                      margin: EdgeInsets.all(2),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Row(
+                          children: [
+                            Container(
+                              height: 45,
+                              width: 45,
+                              child: CircleAvatar(
+                                backgroundImage: AssetImage(f1.path),
+                              ),
+                            ),
+                            W(15),
+                            Text(
+                              "${name[index]}",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 25),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
               ),
-              // Align(
-              //   alignment: Alignment.topCenter,
-              //   child: Container(
-              //       alignment: Alignment.center,
-              //       padding: EdgeInsets.only(top: 40),
-              //       height: 100,
-              //       width: 100,
-              //       child: FloatingActionButton(
-              //         onPressed: () {
-              //           String number =
-              //               "tel: +918596754785";
-              //           launchUrl(Uri.parse(number));
-              //         },
-              //         child: Icon(Icons.call),
-              //         backgroundColor: Colors.green,
-              //       )),
-              // ),
-              // Container(
-              //     alignment: Alignment.center,
-              //     height: 50,
-              //     width: 50,
-              //     child: FloatingActionButton(
-              //       onPressed: () {
-              //         String number =
-              //             "sms: +915547859652";
-              //         launchUrl(Uri.parse(number));
-              //       },
-              //       child: Icon(Icons.sms),
-              //       backgroundColor: Colors.amber,
-              //     )),
             ],
           ),
         ),
       ),
     );
   }
-  void next()
-  {
+
+  void next() {
     name.insert(0, txtname.text);
     no.insert(0, txtno.text);
+    img.insert(0, f1.path);
   }
-
-  //void launchurl(Uri parse) {}
 }
-
