@@ -45,7 +45,7 @@ class _detailState extends State<detail> {
                   height: 100,
                   width: 100,
                   child: CircleAvatar(
-                    backgroundImage: FileImage(File(m2.f1.toString())),
+                  //  backgroundImage: FileImage(m2.),
                   ),
                 ),
               ),
